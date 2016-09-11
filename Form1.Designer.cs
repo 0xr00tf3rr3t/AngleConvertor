@@ -34,8 +34,12 @@
             this.TbPolarY = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.GBCordPolares = new System.Windows.Forms.GroupBox();
+            this.LblPolarY = new System.Windows.Forms.Label();
+            this.LblPolarX = new System.Windows.Forms.Label();
             this.RbPolares = new System.Windows.Forms.RadioButton();
             this.GBCoodPolares = new System.Windows.Forms.GroupBox();
+            this.LblCartY = new System.Windows.Forms.Label();
+            this.LblCartX = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.TbCartX = new System.Windows.Forms.TextBox();
@@ -43,10 +47,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.RbCartecianas = new System.Windows.Forms.RadioButton();
             this.btnCalculate = new System.Windows.Forms.Button();
-            this.LblPolarX = new System.Windows.Forms.Label();
-            this.LblPolarY = new System.Windows.Forms.Label();
-            this.LblCartX = new System.Windows.Forms.Label();
-            this.LblCartY = new System.Windows.Forms.Label();
             this.GBCordPolares.SuspendLayout();
             this.GBCoodPolares.SuspendLayout();
             this.SuspendLayout();
@@ -108,6 +108,26 @@
             this.GBCordPolares.TabStop = false;
             this.GBCordPolares.Text = "Cordenadas Polares";
             // 
+            // LblPolarY
+            // 
+            this.LblPolarY.AutoSize = true;
+            this.LblPolarY.Location = new System.Drawing.Point(108, 48);
+            this.LblPolarY.Name = "LblPolarY";
+            this.LblPolarY.Size = new System.Drawing.Size(14, 17);
+            this.LblPolarY.TabIndex = 6;
+            this.LblPolarY.Text = "°";
+            this.LblPolarY.Visible = false;
+            // 
+            // LblPolarX
+            // 
+            this.LblPolarX.AutoSize = true;
+            this.LblPolarX.Location = new System.Drawing.Point(31, 48);
+            this.LblPolarX.Name = "LblPolarX";
+            this.LblPolarX.Size = new System.Drawing.Size(13, 17);
+            this.LblPolarX.TabIndex = 5;
+            this.LblPolarX.Text = "r";
+            this.LblPolarX.Visible = false;
+            // 
             // RbPolares
             // 
             this.RbPolares.AutoSize = true;
@@ -136,6 +156,24 @@
             this.GBCoodPolares.TabIndex = 6;
             this.GBCoodPolares.TabStop = false;
             this.GBCoodPolares.Text = "Cordenadas Cartecianas ";
+            // 
+            // LblCartY
+            // 
+            this.LblCartY.AutoSize = true;
+            this.LblCartY.Location = new System.Drawing.Point(112, 49);
+            this.LblCartY.Name = "LblCartY";
+            this.LblCartY.Size = new System.Drawing.Size(17, 17);
+            this.LblCartY.TabIndex = 6;
+            this.LblCartY.Text = "Y";
+            // 
+            // LblCartX
+            // 
+            this.LblCartX.AutoSize = true;
+            this.LblCartX.Location = new System.Drawing.Point(31, 48);
+            this.LblCartX.Name = "LblCartX";
+            this.LblCartX.Size = new System.Drawing.Size(17, 17);
+            this.LblCartX.TabIndex = 5;
+            this.LblCartX.Text = "X";
             // 
             // label4
             // 
@@ -199,44 +237,6 @@
             this.btnCalculate.Text = "Calculate";
             this.btnCalculate.UseVisualStyleBackColor = true;
             this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
-            // 
-            // LblPolarX
-            // 
-            this.LblPolarX.AutoSize = true;
-            this.LblPolarX.Location = new System.Drawing.Point(31, 48);
-            this.LblPolarX.Name = "LblPolarX";
-            this.LblPolarX.Size = new System.Drawing.Size(17, 17);
-            this.LblPolarX.TabIndex = 5;
-            this.LblPolarX.Text = "X";
-            this.LblPolarX.Visible = false;
-            // 
-            // LblPolarY
-            // 
-            this.LblPolarY.AutoSize = true;
-            this.LblPolarY.Location = new System.Drawing.Point(109, 49);
-            this.LblPolarY.Name = "LblPolarY";
-            this.LblPolarY.Size = new System.Drawing.Size(17, 17);
-            this.LblPolarY.TabIndex = 6;
-            this.LblPolarY.Text = "Y";
-            this.LblPolarY.Visible = false;
-            // 
-            // LblCartX
-            // 
-            this.LblCartX.AutoSize = true;
-            this.LblCartX.Location = new System.Drawing.Point(31, 48);
-            this.LblCartX.Name = "LblCartX";
-            this.LblCartX.Size = new System.Drawing.Size(17, 17);
-            this.LblCartX.TabIndex = 5;
-            this.LblCartX.Text = "X";
-            // 
-            // LblCartY
-            // 
-            this.LblCartY.AutoSize = true;
-            this.LblCartY.Location = new System.Drawing.Point(112, 49);
-            this.LblCartY.Name = "LblCartY";
-            this.LblCartY.Size = new System.Drawing.Size(17, 17);
-            this.LblCartY.TabIndex = 6;
-            this.LblCartY.Text = "Y";
             // 
             // Form1
             // 

@@ -12,7 +12,8 @@ namespace Calculator
 {
     public partial class Form1 : Form
     { Calculations calculations = new Calculations();
-        double[] newCordinates = new double[2];
+        double[] newCordinatesCart = new double[2];
+        double[] newCordinatesPolars = new double[2];
         public Form1()
         {
             InitializeComponent();
@@ -55,13 +56,24 @@ namespace Calculator
         private void btnCalculate_Click(object sender, EventArgs e)
         {
 
-            if (RbPolares.Visible == true)
+            if (RbPolares.Checked== true)
             {
                 if (checkForNumber(TbPolarX.Text.ToString()) == true && checkForNumber(TbPolarY.Text.ToString()) == true)
                 {
-                    newCordinates = calculations.polarToCart(double.Parse(TbPolarX.Text), double.Parse(TbPolarY.Text));
-                    LblCartX.Text = newCordinates[0].ToString();
-                    LblCartY.Text = newCordinates[1].ToString();
+                    newCordinatesCart = calculations.polarToCart(double.Parse(TbPolarX.Text), double.Parse(TbPolarY.Text));
+                    LblCartX.Text = newCordinatesCart[0].ToString();
+                    LblCartY.Text = newCordinatesCart[1].ToString();
+                }
+                else MessageBox.Show("Only Numbers are accepted!", "Error Found!");
+            }
+            else if (RbCartecianas.Checked == true)
+            {
+                if (checkForNumber(TbCartX.Text.ToString()) == true && checkForNumber(TbCartY.Text.ToString()) == true)
+                {
+                    newCordinatesPolars= calculations.cartToPolars(double.Parse(TbCartX.Text), double.Parse(TbCartY.Text));
+                    LblPolarX.Text = newCordinatesPolars[0].ToString();
+                    LblPolarY.Text = newCordinatesPolars[1].ToString()+"°";
+
                 }
                 else MessageBox.Show("Only Numbers are accepted!", "Error Found!");
             }
@@ -72,7 +84,10 @@ namespace Calculator
             foreach (char c in input)
                 {
                 if (c < '0' || c > '9')
-                    return false;
+                    if (c!='.')
+                    {if (c!='-')
+                        return false;
+                    }
             
             }
 
