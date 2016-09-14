@@ -71,16 +71,30 @@ namespace Calculator
 
         private void btnCalculate_Click(object sender, EventArgs e)
         {
-
+            
             if (RbPolares.Checked== true)
-            {
-                if (checkForNumber(TbPolarX.Text.ToString()) == true && checkForNumber(TbPolarY.Text.ToString()) == true)
+            {if (cb3DPolar.Checked != true)
                 {
-                    newCordinatesCart = calculations.polarToCart(double.Parse(TbPolarX.Text), double.Parse(TbPolarY.Text));
-                    LblCartX.Text = newCordinatesCart[0].ToString();
-                    LblCartY.Text = newCordinatesCart[1].ToString();
+                    if (checkForNumber(TbPolarX.Text.ToString()) == true && checkForNumber(TbPolarY.Text.ToString()) == true)
+                    {
+                        newCordinatesCart = calculations.polarToCart(double.Parse(TbPolarX.Text), double.Parse(TbPolarY.Text));
+                        LblCartX.Text = newCordinatesCart[0].ToString();
+                        LblCartY.Text = newCordinatesCart[1].ToString();
+                        LblCartZ.Text = "0";
+                    }
+                    else MessageBox.Show("Only Numbers are accepted!", "Error Found!");
                 }
-                else MessageBox.Show("Only Numbers are accepted!", "Error Found!");
+                else
+                {
+                    if (checkForNumber(TbPolarX.Text.ToString()) == true && checkForNumber(TbPolarY.Text.ToString()) == true && checkForNumber(TbPolarZ.Text.ToString()) == true)
+                    {
+                        newCordinatesCart = calculations.polarToCart(double.Parse(TbPolarX.Text), double.Parse(TbPolarY.Text), double.Parse(TbPolarZ.Text));
+                        LblCartX.Text = newCordinatesCart[0].ToString();
+                        LblCartY.Text = newCordinatesCart[1].ToString();
+                        LblCartZ.Text = newCordinatesCart[2].ToString();
+                    }
+                    else MessageBox.Show("Only Numbers are accepted!", "Error Found!");
+                }
             }
             else if (RbCartecianas.Checked == true)
             {  if (cb3DCart.Checked!=true)
