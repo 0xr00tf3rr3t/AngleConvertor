@@ -59,9 +59,9 @@ namespace Calculator
             coordPolars[0] = Math.Round(CtpGetR(x, y),2);
             coordPolars[1] = Math.Round(GetTetha(x, y),2);
             return coordPolars;
-        }
+        }//Holds all the logical math  for converting into polars(2D)
 
-        public double[] CartToPolars(double x, double y, double z)
+        public double[] CartToPolars(double x, double y, double z)//Holds all the logical math  for converting into polars(3D)
         {
             var coordPolars = new double[3];
             coordPolars[0] = Math.Round(CtpGetR(x, y, z),2);
@@ -70,12 +70,12 @@ namespace Calculator
             return coordPolars;
         }
 
-        public double CtpGetR(double x, double y, double z)
+        public double CtpGetR(double x, double y, double z)//Gets magnitude(2D)
         {
             return Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2)); // Rz(X^2+Y^2+^2)
         }
 
-        public double CtpGetR(double x, double y)
+        public double CtpGetR(double x, double y)//Gets magnitude(3D)
         {
             return Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)); // Rz(X^2+Y^2)
         }
@@ -100,16 +100,16 @@ namespace Calculator
                 angle += 360;
             }
             return angle;
-        }
+        }//Checks x&y for positive & negative and adds according to it
 
         public double ConvertToDegree(double radiant)
         {
             return radiant*(180/Math.PI);
-        }
+        }//Converts from radiants to degree
 
-        public double ConvertToRadiant(double angle)
+        public double ConvertToRadiant(double degree)//Converts from degree to radiants
         {
-            return (Math.PI/180)*angle;
+            return (Math.PI/180)*degree;
         }
 
         public double GetTetha(double x, double y)
