@@ -25,11 +25,10 @@ namespace Calculator
             double alpha = 0;
             angleRoll = ConvertToRadiant(angleRoll);
             anglepitch = ConvertToRadiant(anglepitch);
-            alpha = GetAlpha(mag, angleRoll, anglepitch);
 
-            coordCart[0] = PtcGetX(mag, angleRoll);
-            coordCart[1] = PtcGetY(mag, angleRoll);
-            coordCart[2] = PtcGetZ(mag, angleRoll, anglepitch);//Alpha
+            coordCart[0] = Math.Round(PtcGetX(mag, angleRoll),2);
+            coordCart[1] = Math.Round(PtcGetY(mag, angleRoll),2);
+            coordCart[2] = Math.Round(PtcGetZ(mag, angleRoll, anglepitch),2);//Alpha
 
 
             return coordCart;
@@ -37,48 +36,48 @@ namespace Calculator
 
         public double PtcGetX(double mag, double angle) //mag cos angle
         {
-            return Math.Round(mag* Math.Cos(angle), 2);
+            return mag* Math.Cos(angle);
         }
 
         public double PtcGetY(double mag, double angle) //mag sin angle
         {
-            return Math.Round(mag* Math.Sin(angle), 2);
+            return mag* Math.Sin(angle);
         }
 
         public double PtcGetZ(double mag, double tetha, double alpha) //mag cos alpha
         {
-            return Math.Round(mag* Math.Cos(alpha), 2);
+            return mag* Math.Cos(alpha);
         }
         #endregion
         /*//////////////////////////////////////////////////////
          /              Cartesean to Polar methods             /
          //////////////////////////////////////////////////////*/
-#region "Cartesean to Polar Methods"
+#region Cartesean to Polar Methods
         public double[] CartToPolars(double x, double y)
         {
             var coordPolars = new double[2];
-            coordPolars[0] = CtpGetR(x, y);
-            coordPolars[1] = GetTetha(x, y);
+            coordPolars[0] = Math.Round(CtpGetR(x, y),2);
+            coordPolars[1] = Math.Round(GetTetha(x, y),2);
             return coordPolars;
         }
 
         public double[] CartToPolars(double x, double y, double z)
         {
             var coordPolars = new double[3];
-            coordPolars[0] = CtpGetR(x, y, z);
-            coordPolars[1] = GetTetha(x, y);
-            coordPolars[2] = GetAlpha(x, y, z);
+            coordPolars[0] = Math.Round(CtpGetR(x, y, z),2);
+            coordPolars[1] =Math.Round(GetTetha(x, y),2);
+            coordPolars[2] = Math.Round(ConvertToDegree(GetAlpha(x, y, z)),2);
             return coordPolars;
         }
 
         public double CtpGetR(double x, double y, double z)
         {
-            return Math.Round(Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2))); // Rz(X^2+Y^2+^2)
+            return Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2)); // Rz(X^2+Y^2+^2)
         }
 
         public double CtpGetR(double x, double y)
         {
-            return Math.Round(Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2))); // Rz(X^2+Y^2)
+            return Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)); // Rz(X^2+Y^2)
         }
         #endregion
 
@@ -103,21 +102,21 @@ namespace Calculator
             return angle;
         }
 
-        public double ConvertToAngle(double radiant)
+        public double ConvertToDegree(double radiant)
         {
             return radiant*(180/Math.PI);
         }
 
         public double ConvertToRadiant(double angle)
         {
-            return angle*(Math.PI/180);
+            return (Math.PI/180)*angle;
         }
 
         public double GetTetha(double x, double y)
         {
             double newvalue = 0;
             newvalue = Math.Atan2(y,x);
-            newvalue = Math.Round(ConvertToAngle(newvalue), 2);
+            newvalue = ConvertToDegree(newvalue);
             newvalue = CheckQuadrant(newvalue, x, y);
 
             return newvalue;
@@ -125,9 +124,9 @@ namespace Calculator
 
         public double GetAlpha(double x, double y, double z)
         {
-            
+
             var d = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
-            return Math.Round(Math.Atan(d)/z,2);
+            return Math.Atan2(d,z);
                 //Tan^-1((Rz(x^2+Y^2)/z))
         }
 #endregion
