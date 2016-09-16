@@ -28,18 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.TbPolarX = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.TbPolarY = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.GBCordPolares = new System.Windows.Forms.GroupBox();
+            this.LblPolarZ = new System.Windows.Forms.Label();
+            this.cb3DPolar = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.TbPolarZ = new System.Windows.Forms.TextBox();
             this.LblPolarY = new System.Windows.Forms.Label();
             this.LblPolarX = new System.Windows.Forms.Label();
             this.RbPolares = new System.Windows.Forms.RadioButton();
             this.GBCoodPolares = new System.Windows.Forms.GroupBox();
+            this.LblCartZ = new System.Windows.Forms.Label();
+            this.cb3DCart = new System.Windows.Forms.CheckBox();
+            this.TbCartZ = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.LblCartY = new System.Windows.Forms.Label();
             this.LblCartX = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -49,12 +56,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.RbCartecianas = new System.Windows.Forms.RadioButton();
             this.btnCalculate = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.TbCartZ = new System.Windows.Forms.TextBox();
-            this.cb3DPolar = new System.Windows.Forms.CheckBox();
-            this.cb3DCart = new System.Windows.Forms.CheckBox();
-            this.LblCartZ = new System.Windows.Forms.Label();
-            this.LblPolarZ = new System.Windows.Forms.Label();
             this.GBCordPolares.SuspendLayout();
             this.GBCoodPolares.SuspendLayout();
             this.SuspendLayout();
@@ -120,6 +121,29 @@
             this.GBCordPolares.TabStop = false;
             this.GBCordPolares.Text = "Cordenadas Polares";
             // 
+            // LblPolarZ
+            // 
+            this.LblPolarZ.AutoSize = true;
+            this.LblPolarZ.Location = new System.Drawing.Point(180, 50);
+            this.LblPolarZ.Name = "LblPolarZ";
+            this.LblPolarZ.Size = new System.Drawing.Size(19, 17);
+            this.LblPolarZ.TabIndex = 10;
+            this.LblPolarZ.Text = "Φ";
+            this.LblPolarZ.Visible = false;
+            // 
+            // cb3DPolar
+            // 
+            this.cb3DPolar.AutoSize = true;
+            this.cb3DPolar.Checked = true;
+            this.cb3DPolar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb3DPolar.Location = new System.Drawing.Point(197, 18);
+            this.cb3DPolar.Name = "cb3DPolar";
+            this.cb3DPolar.Size = new System.Drawing.Size(48, 21);
+            this.cb3DPolar.TabIndex = 9;
+            this.cb3DPolar.Text = "3D";
+            this.cb3DPolar.UseVisualStyleBackColor = true;
+            this.cb3DPolar.CheckedChanged += new System.EventHandler(this.cb3DPolar_CheckedChanged);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -139,7 +163,7 @@
             // LblPolarY
             // 
             this.LblPolarY.AutoSize = true;
-            this.LblPolarY.Location = new System.Drawing.Point(108, 48);
+            this.LblPolarY.Location = new System.Drawing.Point(108, 50);
             this.LblPolarY.Name = "LblPolarY";
             this.LblPolarY.Size = new System.Drawing.Size(14, 17);
             this.LblPolarY.TabIndex = 6;
@@ -149,7 +173,7 @@
             // LblPolarX
             // 
             this.LblPolarX.AutoSize = true;
-            this.LblPolarX.Location = new System.Drawing.Point(31, 48);
+            this.LblPolarX.Location = new System.Drawing.Point(31, 50);
             this.LblPolarX.Name = "LblPolarX";
             this.LblPolarX.Size = new System.Drawing.Size(13, 17);
             this.LblPolarX.TabIndex = 5;
@@ -189,10 +213,50 @@
             this.GBCoodPolares.TabStop = false;
             this.GBCoodPolares.Text = "Cordenadas Cartecianas ";
             // 
+            // LblCartZ
+            // 
+            this.LblCartZ.AutoSize = true;
+            this.LblCartZ.Location = new System.Drawing.Point(180, 50);
+            this.LblCartZ.Name = "LblCartZ";
+            this.LblCartZ.Size = new System.Drawing.Size(17, 17);
+            this.LblCartZ.TabIndex = 12;
+            this.LblCartZ.Text = "Z";
+            // 
+            // cb3DCart
+            // 
+            this.cb3DCart.AutoSize = true;
+            this.cb3DCart.Checked = true;
+            this.cb3DCart.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb3DCart.Location = new System.Drawing.Point(197, 18);
+            this.cb3DCart.Name = "cb3DCart";
+            this.cb3DCart.Size = new System.Drawing.Size(48, 21);
+            this.cb3DCart.TabIndex = 11;
+            this.cb3DCart.Text = "3D";
+            this.cb3DCart.UseVisualStyleBackColor = true;
+            this.cb3DCart.CheckedChanged += new System.EventHandler(this.cb3DCart_CheckedChanged);
+            // 
+            // TbCartZ
+            // 
+            this.TbCartZ.Location = new System.Drawing.Point(179, 45);
+            this.TbCartZ.Name = "TbCartZ";
+            this.TbCartZ.Size = new System.Drawing.Size(47, 22);
+            this.TbCartZ.TabIndex = 10;
+            this.TbCartZ.Visible = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(162, 50);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(12, 17);
+            this.label8.TabIndex = 9;
+            this.label8.Text = ",";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
             // LblCartY
             // 
             this.LblCartY.AutoSize = true;
-            this.LblCartY.Location = new System.Drawing.Point(112, 49);
+            this.LblCartY.Location = new System.Drawing.Point(108, 50);
             this.LblCartY.Name = "LblCartY";
             this.LblCartY.Size = new System.Drawing.Size(17, 17);
             this.LblCartY.TabIndex = 6;
@@ -201,7 +265,7 @@
             // LblCartX
             // 
             this.LblCartX.AutoSize = true;
-            this.LblCartX.Location = new System.Drawing.Point(31, 48);
+            this.LblCartX.Location = new System.Drawing.Point(31, 50);
             this.LblCartX.Name = "LblCartX";
             this.LblCartX.Size = new System.Drawing.Size(17, 17);
             this.LblCartX.TabIndex = 5;
@@ -266,84 +330,22 @@
             this.btnCalculate.Name = "btnCalculate";
             this.btnCalculate.Size = new System.Drawing.Size(120, 40);
             this.btnCalculate.TabIndex = 8;
-            this.btnCalculate.Text = "Calculate";
+            this.btnCalculate.Text = "Calcular";
             this.btnCalculate.UseVisualStyleBackColor = true;
             this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(162, 50);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(12, 17);
-            this.label8.TabIndex = 9;
-            this.label8.Text = ",";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
-            // 
-            // TbCartZ
-            // 
-            this.TbCartZ.Location = new System.Drawing.Point(179, 45);
-            this.TbCartZ.Name = "TbCartZ";
-            this.TbCartZ.Size = new System.Drawing.Size(47, 22);
-            this.TbCartZ.TabIndex = 10;
-            this.TbCartZ.Visible = false;
-            // 
-            // cb3DPolar
-            // 
-            this.cb3DPolar.AutoSize = true;
-            this.cb3DPolar.Checked = true;
-            this.cb3DPolar.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb3DPolar.Location = new System.Drawing.Point(197, 18);
-            this.cb3DPolar.Name = "cb3DPolar";
-            this.cb3DPolar.Size = new System.Drawing.Size(48, 21);
-            this.cb3DPolar.TabIndex = 9;
-            this.cb3DPolar.Text = "3D";
-            this.cb3DPolar.UseVisualStyleBackColor = true;
-            this.cb3DPolar.CheckedChanged += new System.EventHandler(this.cb3DPolar_CheckedChanged);
-            // 
-            // cb3DCart
-            // 
-            this.cb3DCart.AutoSize = true;
-            this.cb3DCart.Checked = true;
-            this.cb3DCart.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb3DCart.Location = new System.Drawing.Point(197, 18);
-            this.cb3DCart.Name = "cb3DCart";
-            this.cb3DCart.Size = new System.Drawing.Size(48, 21);
-            this.cb3DCart.TabIndex = 11;
-            this.cb3DCart.Text = "3D";
-            this.cb3DCart.UseVisualStyleBackColor = true;
-            this.cb3DCart.CheckedChanged += new System.EventHandler(this.cb3DCart_CheckedChanged);
-            // 
-            // LblCartZ
-            // 
-            this.LblCartZ.AutoSize = true;
-            this.LblCartZ.Location = new System.Drawing.Point(179, 48);
-            this.LblCartZ.Name = "LblCartZ";
-            this.LblCartZ.Size = new System.Drawing.Size(17, 17);
-            this.LblCartZ.TabIndex = 12;
-            this.LblCartZ.Text = "Z";
-            // 
-            // LblPolarZ
-            // 
-            this.LblPolarZ.AutoSize = true;
-            this.LblPolarZ.Location = new System.Drawing.Point(179, 49);
-            this.LblPolarZ.Name = "LblPolarZ";
-            this.LblPolarZ.Size = new System.Drawing.Size(19, 17);
-            this.LblPolarZ.TabIndex = 10;
-            this.LblPolarZ.Text = "Φ";
-            this.LblPolarZ.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(718, 425);
+            this.ClientSize = new System.Drawing.Size(337, 425);
             this.Controls.Add(this.btnCalculate);
             this.Controls.Add(this.RbCartecianas);
             this.Controls.Add(this.GBCoodPolares);
             this.Controls.Add(this.RbPolares);
             this.Controls.Add(this.GBCordPolares);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";

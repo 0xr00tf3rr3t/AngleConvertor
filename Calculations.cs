@@ -1,136 +1,144 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calculator
 {
-    class Calculations
+    internal class Calculations
     {
-
-
         /*//////////////////////////////////////////////////////
          /              Polar to Cortesean methods             /
          //////////////////////////////////////////////////////*/
-        public double[] polarToCart(double mag, double angleRoll)
-        {
-            double[] coordCart = new double[2];
+        #region "Polar to Cartesean Methods"
 
-            angleRoll = convertToAngle(angleRoll);
-            coordCart[0] = ptcGetX(mag, angleRoll);
-            coordCart[1] = ptcGetY(mag, angleRoll);
+        public double[] PolarToCart(double mag, double angleRoll)
+        {
+            var coordCart = new double[2] {0, 0};
+            angleRoll = ConvertToRadiant(angleRoll);
+
+            coordCart[0] = PtcGetX(mag, angleRoll);
+            coordCart[1] = PtcGetY(mag, angleRoll);
+            return coordCart;
+        }
+
+        public double[] PolarToCart(double mag, double angleRoll, double anglepitch)
+        {
+            var coordCart = new double[3] {0, 0, 0};
+            double alpha = 0;
+            angleRoll = ConvertToRadiant(angleRoll);
+            anglepitch = ConvertToRadiant(anglepitch);
+            alpha = GetAlpha(mag, angleRoll, anglepitch);
+
+            coordCart[0] = PtcGetX(mag, angleRoll);
+            coordCart[1] = PtcGetY(mag, angleRoll);
+            coordCart[2] = PtcGetZ(mag, angleRoll, anglepitch);//Alpha
+
 
             return coordCart;
         }
-        public double[] polarToCart(double mag, double angleRoll,double anglepitch)
-        {
-            double[] coordCart = new double[3];
-            double alpha;
-            mag = convertToAngle(mag);
-           angleRoll = convertToAngle(angleRoll);
-            alpha = getAlpha(mag, angleRoll, anglepitch);
-     
-            coordCart[0] = ptcGetX(mag, angleRoll);
-            coordCart[1] = ptcGetY(mag, angleRoll);
-            coordCart[2] = ptcGetZ(mag, alpha);
-            
 
-            return coordCart;
-        }
-        public double ptcGetX(double mag,double angle)//mag cos angle
+        public double PtcGetX(double mag, double angle) //mag cos angle
         {
-            return Math.Round(mag * Math.Cos(angle), 2);
+            return Math.Round(mag* Math.Cos(angle), 2);
         }
-        public double ptcGetY(double mag, double angle)//mag sin angle
-        {
-           return  Math.Round(mag * Math.Sin(angle), 2);
-        }
-        public double ptcGetZ(double mag, double alpha)//
-        {
-            return Math.Round(mag * Math.Cos(alpha), 2);
-        }       
 
+        public double PtcGetY(double mag, double angle) //mag sin angle
+        {
+            return Math.Round(mag* Math.Sin(angle), 2);
+        }
+
+        public double PtcGetZ(double mag, double tetha, double alpha) //mag cos alpha
+        {
+            return Math.Round(mag* Math.Cos(alpha), 2);
+        }
+        #endregion
         /*//////////////////////////////////////////////////////
          /              Cartesean to Polar methods             /
          //////////////////////////////////////////////////////*/
-        public double[] cartToPolars(double x, double y)
+#region "Cartesean to Polar Methods"
+        public double[] CartToPolars(double x, double y)
         {
-            double[] coordPolars = new double[2];
-            coordPolars[0] = ctpGetR(x, y);
-            coordPolars[1] = getTetha(x, y);
+            var coordPolars = new double[2];
+            coordPolars[0] = CtpGetR(x, y);
+            coordPolars[1] = GetTetha(x, y);
             return coordPolars;
         }
-        public double[] cartToPolars(double x, double y, double z)
+
+        public double[] CartToPolars(double x, double y, double z)
         {
-            
-            double[] coordPolars = new double[3];
-            coordPolars[0] = ctpGetR(x, y, z);
-            coordPolars[1] = getTetha(x, y);
-            coordPolars[2] = getAlpha(x, y, z);
+            var coordPolars = new double[3];
+            coordPolars[0] = CtpGetR(x, y, z);
+            coordPolars[1] = GetTetha(x, y);
+            coordPolars[2] = GetAlpha(x, y, z);
             return coordPolars;
         }
-        public double ctpGetR(double x,double y,double z)
+
+        public double CtpGetR(double x, double y, double z)
         {
-            return (Math.Round(Math.Sqrt((Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2)))));// Rz(X^2+Y^2+^2)
-        }
-        public double ctpGetR(double x, double y)
-        {
-            return (Math.Round(Math.Sqrt((Math.Pow(x, 2) + Math.Pow(y, 2)))));// Rz(X^2+Y^2)
+            return Math.Round(Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2))); // Rz(X^2+Y^2+^2)
         }
 
+        public double CtpGetR(double x, double y)
+        {
+            return Math.Round(Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2))); // Rz(X^2+Y^2)
+        }
+        #endregion
 
-        //Gets Magnitude for Polar
-      
-        
         /*//////////////////////////////////////////////////////
          /              Other Methods                          /
          //////////////////////////////////////////////////////*/
-        public double checkQuadrant(double angle, double x, double y)
+        #region  Other Methods
+        public double CheckQuadrant(double angle, double x, double y)
         {
-
-            if (x < 0 && y > 0)//if (-x && y) QUADRANT II
-            {
-                angle += 180;
-
-            }
-            else if (x < 0 && y < 0)//if (-x && -y) QUADRANT III
+            if (x < 0 && y > 0) //if (-x && y) QUADRANT II
             {
                 angle += 180;
             }
-            else if (x > 0 && y < 0)//if (x && -y) QUADRANT IV
+            else if (x < 0 && y < 0) //if (-x && -y) QUADRANT III
+            {
+                angle += 180;
+            }
+            else if (x > 0 && y < 0) //if (x && -y) QUADRANT IV
             {
                 angle += 360;
             }
             return angle;
         }
-        public double convertToAngle(double radiant)
+
+        public double ConvertToAngle(double radiant)
         {
-            return radiant * (180 / Math.PI);
+            return radiant*(180/Math.PI);
         }
-        public double getTetha(double x, double y)
+
+        public double ConvertToRadiant(double angle)
         {
-            double newvalue;
-            newvalue = Math.Atan(y / x);
-            newvalue = Math.Round(convertToAngle(newvalue), 2);
-            newvalue = checkQuadrant(newvalue, x, y);
+            return angle*(Math.PI/180);
+        }
+
+        public double GetTetha(double x, double y)
+        {
+            double newvalue = 0;
+            newvalue = Math.Atan2(y,x);
+            newvalue = Math.Round(ConvertToAngle(newvalue), 2);
+            newvalue = CheckQuadrant(newvalue, x, y);
 
             return newvalue;
-
-
         }
-        public double getAlpha(double x, double y, double z)
+
+        public double GetAlpha(double x, double y, double z)
         {
-            return Math.Round(convertToAngle(Math.Atan((Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2)) / z))));//Tan^-1((Rz(x^2+Y^2)/z))
-        }//Gets the Angle for Polar
-         /*/////////////////////////////////////////////////////////
+            
+            var d = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
+            return Math.Round(Math.Atan(d)/z,2);
+                //Tan^-1((Rz(x^2+Y^2)/z))
+        }
+#endregion
+
+        /*/////////////////////////////////////////////////////////
          /                                                         /
          /////////////////////////////////////////////////////////*/
 
-        internal void polarToCart(bool v)
+        internal void PolarToCart(bool v)
         {
             throw new NotImplementedException();
         }
-
     }
 }

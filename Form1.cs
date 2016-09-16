@@ -71,53 +71,65 @@ namespace Calculator
 
         private void btnCalculate_Click(object sender, EventArgs e)
         {
-            
+            /*////////////////////////////////////////////////////////////////////////////////////////////////////////////
+             *                                                                                                           *
+             *                                           Polar calls from Form                                           *
+             *                                                                                                           *
+             ////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
             if (RbPolares.Checked== true)
             {if (cb3DPolar.Checked != true)
                 {
-                    if (checkForNumber(TbPolarX.Text.ToString()) == true && checkForNumber(TbPolarY.Text.ToString()) == true)
+                    if (checkForNumber(TbPolarX.Text) == true && checkForNumber(TbPolarY.Text) == true&& checkPolarAngles(TbPolarX.Text,TbPolarY.Text))
                     {
-                        newCordinatesCart = calculations.polarToCart(double.Parse(TbPolarX.Text), double.Parse(TbPolarY.Text));
+                        newCordinatesCart = calculations.PolarToCart(double.Parse(TbPolarX.Text), double.Parse(TbPolarY.Text));
                         LblCartX.Text = newCordinatesCart[0].ToString();
                         LblCartY.Text = newCordinatesCart[1].ToString();
                         LblCartZ.Text = "0";
                     }
-                    else MessageBox.Show("Only Numbers are accepted!", "Error Found!");
+                    else MessageBox.Show("Only Numbers are accepted! Make sure the input isn't empty, or 0", "Error Found!");
                 }
                 else
                 {
-                    if (checkForNumber(TbPolarX.Text.ToString()) == true && checkForNumber(TbPolarY.Text.ToString()) == true && checkForNumber(TbPolarZ.Text.ToString()) == true)
+                    if (checkForNumber(TbPolarX.Text.ToString()) == true && checkForNumber(TbPolarY.Text.ToString()) == true && checkForNumber(TbPolarZ.Text.ToString()) == true&& checkPolarAngles(TbPolarX.Text.ToString(), TbPolarY.Text.ToString(),TbPolarZ.Text.ToString()))
                     {
-                        newCordinatesCart = calculations.polarToCart(double.Parse(TbPolarX.Text), double.Parse(TbPolarY.Text), double.Parse(TbPolarZ.Text));
+                        newCordinatesCart = calculations.PolarToCart(double.Parse(TbPolarX.Text), double.Parse(TbPolarY.Text), double.Parse(TbPolarZ.Text));
                         LblCartX.Text = newCordinatesCart[0].ToString();
                         LblCartY.Text = newCordinatesCart[1].ToString();
                         LblCartZ.Text = newCordinatesCart[2].ToString();
                     }
-                    else MessageBox.Show("Only Numbers are accepted!", "Error Found!");
+                    else MessageBox.Show("Only Numbers are accepted! Make sure the input isn't empty, or 0", "Error Found!");
                 }
             }
+
+
+            /*////////////////////////////////////////////////////////////////////////////////////////////////////////////
+             *                                                                                                           *
+             *                                           Cartesian calls from Form                                           *
+             *                                                                                                           *
+             ////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
             else if (RbCartecianas.Checked == true)
             {  if (cb3DCart.Checked!=true)
                 {
                     if (checkForNumber(TbCartX.Text.ToString()) == true && checkForNumber(TbCartY.Text.ToString()) == true)
                     {
-                        newCordinatesPolars = calculations.cartToPolars(double.Parse(TbCartX.Text), double.Parse(TbCartY.Text));
+                        newCordinatesPolars = calculations.CartToPolars(double.Parse(TbCartX.Text), double.Parse(TbCartY.Text));
                         LblPolarX.Text = newCordinatesPolars[0].ToString();
                         LblPolarY.Text = newCordinatesPolars[1].ToString() + "°";
                         LblPolarZ.Text = "0";
                     }
-                    else MessageBox.Show("Only Numbers are accepted!", "Error Found!");
+                    else MessageBox.Show("Only Numbers are accepted! Make sure the input isn't empty, or 0", "Error Found!");
                 }
                 else
                 {
                     if (checkForNumber(TbCartX.Text.ToString()) == true && checkForNumber(TbCartY.Text.ToString()) == true&&checkForNumber(TbCartZ.Text.ToString()))
                     {
-                        newCordinatesPolars = calculations.cartToPolars(double.Parse(TbCartX.Text), double.Parse(TbCartY.Text), double.Parse(TbCartZ.Text));
+                        newCordinatesPolars = calculations.CartToPolars(double.Parse(TbCartX.Text), double.Parse(TbCartY.Text), double.Parse(TbCartZ.Text));
                         LblPolarX.Text = newCordinatesPolars[0].ToString();
                         LblPolarY.Text = newCordinatesPolars[1].ToString() + "°";
                         LblPolarZ.Text = newCordinatesPolars[2].ToString();
                     }
-                    else MessageBox.Show("Only Numbers are accepted!", "Error Found!");
+                    else MessageBox.Show("Only Numbers are accepted! Make sure the input isn't empty, or 0", "Error Found!");
                 }
                
             }
@@ -129,15 +141,57 @@ namespace Calculator
                 {
                 if (c < '0' || c > '9')
                     if (c!='.')
-                    {if (c!='-')
-                        return false;
+                    {if (c != '-')
+                            if (string.IsNullOrWhiteSpace(input))
+                            {
+                                return false;
+                            }
                     }
             
             }
 
             return true;
-        }
-       
+        }//Check if there are letters inside the txtboxes
+        public bool checkPolarAngles(string mag,string angleRoll,string anglePitch )
+        {    if (checkForNumber(mag) == true && checkForNumber(angleRoll) == true && checkForNumber(anglePitch) == true)
+            {
+                if (double.Parse(mag) < 0)
+                {
+                    MessageBox.Show("Remember that magnitud can't be 0");
+                    return false;
+                }
+                else if (double.Parse(angleRoll) > 360 || double.Parse(angleRoll) < 0)
+                {
+                    MessageBox.Show("Remember that the roll angle can't be negative or 360°");
+                    return false;
+                }
+                else if (double.Parse(anglePitch) > 90)
+                {
+                    MessageBox.Show("Remember that the pitch angle haves to be less than 90°");
+                    return false;
+                }
+
+
+                return true;
+            }
+            return false;
+   
+        }//Validates negativity and such
+        public bool checkPolarAngles(string mag, string angleRoll)
+        {
+            if (double.Parse(mag) < 0)
+            {
+                MessageBox.Show("Remember that magnitud can't be 0°");
+                return false;
+            }
+            else if (double.Parse(angleRoll) > 360 || double.Parse(angleRoll) < 0)
+            {
+                MessageBox.Show("Remember that the roll angle can't be negative or 360°");
+            }
+            
+            return true;
+        }// Validates negativity and such 
+
 
         private void label8_Click(object sender, EventArgs e)
         {
@@ -151,7 +205,7 @@ namespace Calculator
 
         private void cb3DPolar_CheckedChanged(object sender, EventArgs e)
         {
-            if (cb3DPolar.Checked == true)
+            if(cb3DPolar.Checked == true)
             {
                 TbPolarZ.ReadOnly = false;
 
