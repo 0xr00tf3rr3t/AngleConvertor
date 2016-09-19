@@ -1,6 +1,6 @@
 ﻿namespace Calculator
 {
-    partial class Form1
+    partial class fmCalculation
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmCalculation));
             this.TbPolarX = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -326,19 +326,21 @@
             // 
             // btnCalculate
             // 
+            this.btnCalculate.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnCalculate.Location = new System.Drawing.Point(105, 305);
             this.btnCalculate.Name = "btnCalculate";
             this.btnCalculate.Size = new System.Drawing.Size(120, 40);
             this.btnCalculate.TabIndex = 8;
             this.btnCalculate.Text = "Calcular";
-            this.btnCalculate.UseVisualStyleBackColor = true;
+            this.btnCalculate.UseVisualStyleBackColor = false;
             this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
             // 
-            // Form1
+            // fmCalculation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 425);
+            this.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.ClientSize = new System.Drawing.Size(355, 425);
             this.Controls.Add(this.btnCalculate);
             this.Controls.Add(this.RbCartecianas);
             this.Controls.Add(this.GBCoodPolares);
@@ -348,8 +350,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form1";
-            this.Text = "Calculadora de Cordenadas";
+            this.Name = "fmCalculation";
+            this.Text = "Convertidora de Cordenadas";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.GBCordPolares.ResumeLayout(false);
             this.GBCordPolares.PerformLayout();

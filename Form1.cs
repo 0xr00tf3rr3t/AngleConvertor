@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
-    public partial class Form1 : Form
+    public partial class fmCalculation : Form
     { Calculations calculations=new Calculations() ;
         double[] newCordinatesCart = new double[3];
         double[] newCordinatesPolars = new double[3];
-        public Form1()
+        public fmCalculation()
         {
             InitializeComponent();
         }
@@ -137,18 +137,23 @@ namespace Calculator
         
         public bool checkForNumber(string input)
         {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;}
+
+            else
+                 
             foreach (char c in input)
                 {
                 if (c < '0' || c > '9')
-                    if (c!='.')
-                    {if (c != '-')
-                            if (string.IsNullOrWhiteSpace(input))
-                            {
-                                return false;
-                            }
+                    if (c != '.' && c != '-')
+                    {
+                        return false;
                     }
-            
-            }
+
+
+
+                }
 
             return true;
         }//Check if there are letters inside the txtboxes

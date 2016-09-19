@@ -115,6 +115,10 @@ namespace Calculator
         public double GetTetha(double x, double y)
         {
             double newvalue = 0;
+            if (x == 0)
+            {
+                return 0;
+            }
             newvalue = Math.Atan2(y,x);
             newvalue = ConvertToDegree(newvalue);
             newvalue = CheckQuadrant(newvalue, x, y);
@@ -126,6 +130,11 @@ namespace Calculator
         {
 
             var d = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
+            if (z == 0)
+            {
+                return 0;
+            }
+
             return Math.Atan2(d,z);
                 //Tan^-1((Rz(x^2+Y^2)/z))
         }
