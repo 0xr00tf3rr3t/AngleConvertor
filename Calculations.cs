@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Calculator
 {
@@ -8,6 +9,7 @@ namespace Calculator
          /              Polar to Cortesean methods             /
          //////////////////////////////////////////////////////*/
         #region "Polar to Cartesean Methods"
+            
 
         public double[] PolarToCart(double mag, double angleRoll)
         {
@@ -25,9 +27,33 @@ namespace Calculator
             double alpha = 0;
             angleRoll = ConvertToRadiant(angleRoll);
             anglepitch = ConvertToRadiant(anglepitch);
+            if (mag == 0)
+            {
+                MessageBox.Show("Magnitud can't be 0", "Error Found!");
+                coordCart[0] = 0;
+                coordCart[1] = 0;
+                coordCart[2] = 0;
+            }
+            if (angleRoll == 0 && anglepitch == 0)
+            {
+                MessageBox.Show("Both angles can't be 0","Error Found!");
+                coordCart[0] = 0;
+                coordCart[1] = 0;
+                coordCart[2] = 0;
+                return coordCart;
 
-            coordCart[0] = Math.Round(PtcGetX(mag, angleRoll),2);
-            coordCart[1] = Math.Round(PtcGetY(mag, angleRoll),2);
+            }
+            if (anglepitch == 0)
+            {
+                coordCart[0] = 0;
+                coordCart[1] = 0;
+            }
+            else
+            {
+                coordCart[0] = Math.Round(PtcGetX(mag, angleRoll), 2);
+                coordCart[1] = Math.Round(PtcGetY(mag, angleRoll), 2);
+            }
+
             coordCart[2] = Math.Round(PtcGetZ(mag, angleRoll, anglepitch),2);//Alpha
 
 
@@ -36,6 +62,7 @@ namespace Calculator
 
         public double PtcGetX(double mag, double angle) //mag cos angle
         {
+
             return mag* Math.Cos(angle);
         }
 
@@ -46,6 +73,8 @@ namespace Calculator
 
         public double PtcGetZ(double mag, double tetha, double alpha) //mag cos alpha
         {
+         
+
             return mag* Math.Cos(alpha);
         }
         #endregion
@@ -64,9 +93,21 @@ namespace Calculator
         public double[] CartToPolars(double x, double y, double z)//Holds all the logical math  for converting into polars(3D)
         {
             var coordPolars = new double[3];
+
             coordPolars[0] = Math.Round(CtpGetR(x, y, z),2);
-            coordPolars[1] =Math.Round(GetTetha(x, y),2);
-            coordPolars[2] = Math.Round(ConvertToDegree(GetAlpha(x, y, z)),2);
+            if (x != 0)
+            {
+                coordPolars[1] = Math.Round(GetTetha(x, y), 2);
+            }
+            else coordPolars[1] = 90;
+
+
+            if (z != 0)
+            {
+                coordPolars[2] = Math.Round(ConvertToDegree(GetAlpha(x, y, z)), 2);
+            }
+            else coordPolars[2] = 90;
+
             return coordPolars;
         }
 

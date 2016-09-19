@@ -12,26 +12,12 @@ namespace Calculator
 {
     public partial class addSubVector : Form
     {
-        #region
+        #region Variables
         string inputAx, inputAy, inputAz, inputBx, inputBy, inputBz;
         double Ax = 0, Ay = 0, Az = 0, Bx = 0, By = 0, Bz = 0, Rx = 0, Ry = 0, Rz = 0, Magnitude = 0, Theta = 0, Alpha = 0;
         #endregion
 
-        /*private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(addSubVector));
-            this.SuspendLayout();
-            // 
-            // addSubVector
-            // 
-            this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(357, 253);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "addSubVector";
-            this.ResumeLayout(false);
-
-        }*/
+     
 
         public addSubVector()
         {
@@ -45,8 +31,7 @@ namespace Calculator
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //string inputAx, inputAy, inputAz, inputBx, inputBy, inputBz;
-            //double Ax = 0, Ay = 0, Az = 0, Bx = 0, By = 0, Bz = 0, Rx = 0, Ry = 0, Rz = 0, Magnitude = 0, Theta = 0, Alpha = 0;
+            
             double[] resultR = new double[3];
 
             inputAx = txtAx.Text;
@@ -118,8 +103,6 @@ namespace Calculator
 
         private void btnSubtract_Click(object sender, EventArgs e)
         {
-            //string inputAx, inputAy, inputAz, inputBx, inputBy, inputBz;
-            //double Ax = 0, Ay = 0, Az = 0, Bx = 0, By = 0, Bz = 0, Rx = 0, Ry = 0, Rz = 0, Magnitude = 0, Theta = 0, Alpha = 0;
             double[] resultR = new double[3];
 
             inputAx = txtAx.Text;
@@ -129,7 +112,12 @@ namespace Calculator
             inputBx = txtBx.Text;
             inputBy = txtBy.Text;
             inputBz = txtBz.Text;
-
+            /********************************************************
+             *                                                      *
+             *                 Checks for Numbers                   *
+             *                                                      *
+             ********************************************************/
+            #region CheckForNumbers
             if (checkForNumber(inputAx))
             {
                 Ax = convertToDouble(inputAx);
@@ -159,6 +147,7 @@ namespace Calculator
             {
                 Bz = convertToDouble(inputBz);
             }
+            #endregion
 
             resultR = subVectors(Ax, Ay, Az, Bx, By, Bz);
 
@@ -188,6 +177,12 @@ namespace Calculator
 
         }
 
+        /********************************************************
+         *                                                      *
+         *                 Other Funtions                       *
+         *                                                      *
+         ********************************************************/
+        #region Other Funtions
         public double[] addVectors(double Ax, double Ay, double Az, double Bx, double By, double Bz)
         {
             double[] result = new double[3];
@@ -218,9 +213,12 @@ namespace Calculator
         public double getTheta(double Rx, double Ry)
         {
             double Theta;
-
+            if (Rx == 0)
+            {
+                return 0;
+            }
             Theta = Math.Round(Math.Atan(Ry / Rx));
-            Theta = Math.Round(convertToAngle(Theta));
+            Theta = Math.Round(ConvertToRadiant(Theta));
             Theta = Math.Round(checkQuadrant(Theta, Rx, Ry));
 
             return Theta;
@@ -228,6 +226,10 @@ namespace Calculator
 
         public double getAlpha(double Rx, double Ry, double Rz)
         {
+            if (Rz == 0)
+            {
+                return 0;
+            }
             return Math.Round(convertToAngle(Math.Atan((Math.Sqrt(Math.Pow(Rx, 2) + Math.Pow(Ry, 2)) / Rz))));
         }
 
@@ -261,14 +263,17 @@ namespace Calculator
         {
             return radiant * (180 / Math.PI);
         }
-
-        //Check and process user input code
-      
+        public double ConvertToRadiant(double degree)//Converts from degree to radiants
+        {
+            return (Math.PI / 180) * degree;
+        }
 
         public bool checkForNumber(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
+                MessageBox.Show("The Input can't be Empty","Error Found!");
+                ;
                 return false;
             }
 
@@ -292,6 +297,6 @@ namespace Calculator
         {
             return Convert.ToDouble(input);
         }
-
+        #endregion Other Funtions
     }
 }
