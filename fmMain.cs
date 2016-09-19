@@ -19,7 +19,7 @@ namespace Calculator
 
         private void btnConvertion_Click(object sender, EventArgs e)
         {
-           fmCalculation calc = new fmCalculation();
+           FmCalculation calc = new FmCalculation();
             calc.Show();
         
         }

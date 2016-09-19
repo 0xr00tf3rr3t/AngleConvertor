@@ -42,37 +42,37 @@ namespace Calculator
             inputBy = txtBy.Text;
             inputBz = txtBz.Text;
 
-            if( checkForNumber(inputAx))
+            if( CheckForNumber(inputAx))
             {
-                Ax = convertToDouble(inputAx);
+                Ax = ConvertToDouble(inputAx);
             }
 
-            if ( checkForNumber(inputAy))
+            if ( CheckForNumber(inputAy))
             {
-                Ay = convertToDouble(inputAy);
+                Ay = ConvertToDouble(inputAy);
             }
 
-            if (checkForNumber(inputAz))
+            if (CheckForNumber(inputAz))
             {
-                Az = convertToDouble(inputAz);
+                Az = ConvertToDouble(inputAz);
             }
 
-            if ( checkForNumber(inputBx))
+            if ( CheckForNumber(inputBx))
             {
-                Bx = convertToDouble(inputBx);
+                Bx = ConvertToDouble(inputBx);
             }
 
-            if ( checkForNumber(inputBy))
+            if ( CheckForNumber(inputBy))
             {
-                By = convertToDouble(inputBy);
+                By = ConvertToDouble(inputBy);
             }
 
-            if (checkForNumber(inputBz))
+            if (CheckForNumber(inputBz))
             {
-                Bz = convertToDouble(inputBz);
+                Bz = ConvertToDouble(inputBz);
             }
 
-            resultR = addVectors(Ax, Ay, Az, Bx, By, Bz);
+            resultR = AddVectors(Ax, Ay, Az, Bx, By, Bz);
 
             lblRX.Text = resultR[0].ToString() + "î";
             lblRY.Text = resultR[1].ToString() + "ĵ";
@@ -82,15 +82,15 @@ namespace Calculator
             Ry = resultR[1];
             Rz = resultR[2];
 
-            Magnitude = getMag(Rx, Ry, Rz);
+            Magnitude = GetMag(Rx, Ry, Rz);
             lblMagRes.Text = "Sqrt(" + Rx + "² + " + Ry + "² + " + Rz + "²) = " + Magnitude.ToString();
 
-            Theta = getTheta(Rx, Ry);
+            Theta = GetTheta(Rx, Ry);
             lblThetaRes.Text = "Atan(" + Ry + "/" + Rx + ") = " + Theta.ToString() + "°";
 
             if(Rz < 0 || Rz > 0)
             {
-                Alpha = getAlpha(Rx, Ry, Rz);
+                Alpha = GetAlpha(Rx, Ry, Rz);
                 lblAlphaRes.Text = Alpha.ToString() + "°";
             }
             else
@@ -118,38 +118,38 @@ namespace Calculator
              *                                                      *
              ********************************************************/
             #region CheckForNumbers
-            if (checkForNumber(inputAx))
+            if (CheckForNumber(inputAx))
             {
-                Ax = convertToDouble(inputAx);
+                Ax = ConvertToDouble(inputAx);
             }
 
-            if (checkForNumber(inputAy))
+            if (CheckForNumber(inputAy))
             {
-                Ay = convertToDouble(inputAy);
+                Ay = ConvertToDouble(inputAy);
             }
 
-            if ( checkForNumber(inputAz))
+            if ( CheckForNumber(inputAz))
             {
-                Az = convertToDouble(inputAz);
+                Az = ConvertToDouble(inputAz);
             }
 
-            if ( checkForNumber(inputBx))
+            if ( CheckForNumber(inputBx))
             {
-                Bx = convertToDouble(inputBx);
+                Bx = ConvertToDouble(inputBx);
             }
 
-            if (checkForNumber(inputBy))
+            if (CheckForNumber(inputBy))
             {
-                By = convertToDouble(inputBy);
+                By = ConvertToDouble(inputBy);
             }
 
-            if ( checkForNumber(inputBz))
+            if ( CheckForNumber(inputBz))
             {
-                Bz = convertToDouble(inputBz);
+                Bz = ConvertToDouble(inputBz);
             }
             #endregion
 
-            resultR = subVectors(Ax, Ay, Az, Bx, By, Bz);
+            resultR = SubVectors(Ax, Ay, Az, Bx, By, Bz);
 
             lblRX.Text = resultR[0].ToString() + "î";
             lblRY.Text = resultR[1].ToString() + "ĵ";
@@ -159,15 +159,15 @@ namespace Calculator
             Ry = resultR[1];
             Rz = resultR[2];
 
-            Magnitude = getMag(Rx, Ry, Rz);
+            Magnitude = GetMag(Rx, Ry, Rz);
             lblMagRes.Text = "Sqrt(" + Rx + "² + " + Ry + "² + " + Rz + "²) = " + Magnitude.ToString();
 
-            Theta = getTheta(Rx, Ry);
+            Theta = GetTheta(Rx, Ry);
             lblThetaRes.Text = "Atan(" + Ry + "/" + Rx + ") = " + Theta.ToString() + "°";
 
             if (Rz < 0 || Rz > 0)
             {
-                Alpha = getAlpha(Rx, Ry, Rz);
+                Alpha = GetAlpha(Rx, Ry, Rz);
                 lblAlphaRes.Text = Alpha.ToString() + "°";
             }
             else
@@ -183,7 +183,7 @@ namespace Calculator
          *                                                      *
          ********************************************************/
         #region Other Funtions
-        public double[] addVectors(double Ax, double Ay, double Az, double Bx, double By, double Bz)
+        public double[] AddVectors(double Ax, double Ay, double Az, double Bx, double By, double Bz)
         {
             double[] result = new double[3];
 
@@ -194,7 +194,7 @@ namespace Calculator
             return result; 
         }
 
-        public double[] subVectors(double Ax, double Ay, double Az, double Bx, double By, double Bz)
+        public double[] SubVectors(double Ax, double Ay, double Az, double Bx, double By, double Bz)
         {
             double[] result = new double[3];
 
@@ -205,35 +205,36 @@ namespace Calculator
             return result;
         }
 
-        public double getMag(double Rx, double Ry, double Rz)
+        public double GetMag(double Rx, double Ry, double Rz)
         {
             return Math.Round(Math.Sqrt(Math.Pow(Rx, 2) + Math.Pow(Ry, 2) + Math.Pow(Rz, 2)));
         }
 
-        public double getTheta(double Rx, double Ry)
+        public double GetTheta(double Rx, double Ry)
         {
             double Theta;
             if (Rx == 0)
             {
                 return 0;
             }
-            Theta = Math.Round(Math.Atan(Ry / Rx));
-            Theta = Math.Round(ConvertToRadiant(Theta));
-            Theta = Math.Round(checkQuadrant(Theta, Rx, Ry));
+            Theta = Math.Atan(Ry / Rx);
+            Theta = ConvertToDegree(Theta);
+            Theta = CheckQuadrant(Theta, Rx, Ry);
 
             return Theta;
         }
 
-        public double getAlpha(double Rx, double Ry, double Rz)
+        public double GetAlpha(double Rx, double Ry, double Rz)
         {
             if (Rz == 0)
             {
                 return 0;
             }
-            return Math.Round(convertToAngle(Math.Atan((Math.Sqrt(Math.Pow(Rx, 2) + Math.Pow(Ry, 2)) / Rz))));
+
+            return Math.Round(ConvertToDegree(Math.Atan((Math.Sqrt(Math.Pow(Rx, 2) + Math.Pow(Ry, 2)) / Rz))));
         }
 
-        public double checkQuadrant(double Theta, double Rx, double Ry)
+        public double CheckQuadrant(double Theta, double Rx, double Ry)
         {
             if (Theta < 0 && Rx > 0 && Ry > 0)
             {
@@ -259,7 +260,7 @@ namespace Calculator
             return Theta;
         }
 
-        public double convertToAngle(double radiant)
+        public double ConvertToDegree(double radiant)
         {
             return radiant * (180 / Math.PI);
         }
@@ -268,7 +269,7 @@ namespace Calculator
             return (Math.PI / 180) * degree;
         }
 
-        public bool checkForNumber(string input)
+        public bool CheckForNumber(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -293,7 +294,7 @@ namespace Calculator
             return true;
         }
 
-        public double convertToDouble(string input)
+        public double ConvertToDouble(string input)
         {
             return Convert.ToDouble(input);
         }

@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
-    public partial class fmCalculation : Form
+    public partial class FmCalculation : Form
     {
         Calculations calculations = new Calculations();
         double[] newCordinatesCart = new double[3];
         double[] newCordinatesPolars = new double[3];
 
-        public fmCalculation()
+        public FmCalculation()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace Calculator
         {
             if (RbPolares.Checked == true)
             {
-//Cartecian's Radio Button
+            //Cartecian's Radio Button
                 RbCartecianas.Checked = false;
                 //Cartesian Text Boxes
                 TbCartX.Visible = false;
@@ -83,8 +83,8 @@ namespace Calculator
             {
                 if (cb3DPolar.Checked != true)
                 {
-                    if (checkForNumber(TbPolarX.Text) == true && checkForNumber(TbPolarY.Text) == true &&
-                        checkPolarAngles(TbPolarX.Text, TbPolarY.Text))
+                    if (CheckForNumber(TbPolarX.Text) == true && CheckForNumber(TbPolarY.Text) == true &&
+                        CheckPolarAngles(TbPolarX.Text, TbPolarY.Text))
                     {
                         newCordinatesCart = calculations.PolarToCart(double.Parse(TbPolarX.Text),
                             double.Parse(TbPolarY.Text));
@@ -100,10 +100,10 @@ namespace Calculator
                 }
                 else
                 {
-                    if (checkForNumber(TbPolarX.Text.ToString()) == true &&
-                        checkForNumber(TbPolarY.Text.ToString()) == true &&
-                        checkForNumber(TbPolarZ.Text.ToString()) == true &&
-                        checkPolarAngles(TbPolarX.Text.ToString(), TbPolarY.Text.ToString(), TbPolarZ.Text.ToString()))
+                    if (CheckForNumber(TbPolarX.Text.ToString()) == true &&
+                        CheckForNumber(TbPolarY.Text.ToString()) == true &&
+                        CheckForNumber(TbPolarZ.Text.ToString()) == true &&
+                        CheckPolarAngles(TbPolarX.Text.ToString(), TbPolarY.Text.ToString(), TbPolarZ.Text.ToString()))
                     {
                         newCordinatesCart = calculations.PolarToCart(double.Parse(TbPolarX.Text),
                             double.Parse(TbPolarY.Text), double.Parse(TbPolarZ.Text));
@@ -130,8 +130,8 @@ namespace Calculator
             {
                 if (cb3DCart.Checked != true)
                 {
-                    if (checkForNumber(TbCartX.Text.ToString()) == true &&
-                        checkForNumber(TbCartY.Text.ToString()) == true)
+                    if (CheckForNumber(TbCartX.Text.ToString()) == true &&
+                        CheckForNumber(TbCartY.Text.ToString()) == true)
                     {
                         newCordinatesPolars = calculations.CartToPolars(double.Parse(TbCartX.Text),
                             double.Parse(TbCartY.Text));
@@ -147,8 +147,8 @@ namespace Calculator
                 }
                 else
                 {
-                    if (checkForNumber(TbCartX.Text.ToString()) == true &&
-                        checkForNumber(TbCartY.Text.ToString()) == true && checkForNumber(TbCartZ.Text.ToString()))
+                    if (CheckForNumber(TbCartX.Text.ToString()) == true &&
+                        CheckForNumber(TbCartY.Text.ToString()) == true && CheckForNumber(TbCartZ.Text.ToString()))
                     {
                         newCordinatesPolars = calculations.CartToPolars(double.Parse(TbCartX.Text),
                             double.Parse(TbCartY.Text), double.Parse(TbCartZ.Text));
@@ -165,7 +165,7 @@ namespace Calculator
             }
         }
 
-        public bool checkForNumber(string input)
+        public bool CheckForNumber(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -189,9 +189,9 @@ namespace Calculator
             return true;
         } //Check if there are letters inside the txtboxes
 
-        public bool checkPolarAngles(string mag, string angleRoll, string anglePitch)
+        public bool CheckPolarAngles(string mag, string angleRoll, string anglePitch)
         {
-            if (checkForNumber(mag) == true && checkForNumber(angleRoll) == true && checkForNumber(anglePitch) == true)
+            if (CheckForNumber(mag) == true && CheckForNumber(angleRoll) == true && CheckForNumber(anglePitch) == true)
             {
                 if (double.Parse(mag) < 0)
                 {
@@ -215,7 +215,7 @@ namespace Calculator
             return false;
         } //Validates negativity and such
 
-        public bool checkPolarAngles(string mag, string angleRoll)
+        public bool CheckPolarAngles(string mag, string angleRoll)
         {
             if (double.Parse(mag) < 0)
             {
